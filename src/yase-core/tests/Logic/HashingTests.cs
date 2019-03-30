@@ -21,9 +21,9 @@ namespace yase_core.Logic.Tests
         }
 
         [Test]
-        public void Should_be_identity () 
+        public void Should_long_url_be_identity () 
         {
-            Assert.AreEqual ("http://test.com/", sut.Create(new Uri(TEST_URL)).Shortener.AbsoluteUri);
+            Assert.AreEqual ("http://test.com/", sut.Create(new Uri(TEST_URL)).LongUrl.AbsoluteUri);
         }
     }
 }
