@@ -25,10 +25,6 @@ namespace yase_core
             WebHost
                 .CreateDefaultBuilder(args)
                 .UseKestrel()
-                .ConfigureServices(
-                    services => services
-                        .AddSingleton<HttpClient>(new HttpClient())
-                )
                 .UseStartup<Startup>();
     }
 }

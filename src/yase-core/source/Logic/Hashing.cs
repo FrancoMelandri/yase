@@ -11,6 +11,13 @@ namespace yase_core.Logic
 
     public class Hashing : IHashing
     {
+        ISettings _settings;
+
+        public Hashing(ISettings settings) 
+        {
+            _settings = settings;
+        }
+
         public HashingModel Create(Uri url)
         {
             return new HashingModel 
