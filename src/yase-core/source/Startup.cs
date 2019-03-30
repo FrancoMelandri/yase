@@ -37,8 +37,12 @@ namespace yase_core
             services
                 .AddSingleton<ISettings>(settings);
 
+            var hash = new Hash();
             services
-                .AddSingleton<IHash>(new Hash());
+                .AddSingleton<IHash>(hash);
+
+            services
+                .AddSingleton<IHashing>(new Hashing(settings, hash));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
