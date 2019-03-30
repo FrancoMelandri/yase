@@ -12,17 +12,25 @@ namespace yase_core.Logic
     public class Hashing : IHashing
     {
         ISettings _settings;
+        IHash _hash;
 
-        public Hashing(ISettings settings) 
+        public Hashing(ISettings settings,
+                       IHash hash) 
         {
             _settings = settings;
-        }
+            _hash = hash; 
+        }        
 
         public HashingModel Create(Uri url)
-        {
+        {           
+            var tinyUrl = new Uri(string.Format("{0}/{1}", 
+                                                _settings.BaseUrl,
+                                                _hash.Get(url.AbsolutePath, 
+                                                           _settings.Length)));
             return new HashingModel 
             {
-                Shortener = url,
+                TinyUrl = tinyUrl,
+                LongUrl = url,
                 Hitted = 0
             };
         }

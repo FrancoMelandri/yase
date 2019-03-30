@@ -11,10 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using yase_core.Logic;
+
 namespace yase_core
 {
     public class Startup
     {
+        const string HASHING_SECTION = "Hashing";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +31,14 @@ namespace yase_core
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var hashingSection = Configuration.GetSection(HASHING_SECTION);
+            var settings = hashingSection.Get<Settings>();
+            services
+                .AddSingleton<ISettings>(settings);
+
+            services
+                .AddSingleton<IHash>(new Hash());
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
