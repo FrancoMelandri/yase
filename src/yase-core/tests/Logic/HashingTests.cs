@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using yase_core.Logic;
 using System;
+using Moq;
 
 namespace yase_core.Logic.Tests 
 {
@@ -9,12 +10,14 @@ namespace yase_core.Logic.Tests
     {
         private const string TEST_URL = "http://test.com";
 
-        private Hashing sut;
+        private Hashing sut;   
+        private Mock<ISettings> settings;
 
         [SetUp]
         public void SetUp()
         {
-            sut = new Hashing();
+            settings = new Mock<ISettings> ();
+            sut = new Hashing(settings.Object);
         }
 
         [Test]
