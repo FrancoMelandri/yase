@@ -32,7 +32,7 @@ namespace yase_core.Logic
             return new HashingModel 
             {
                 TinyUrl = tinyUrl,
-                LongUrl = url,
+                OriginalUrl = url,
                 Hitted = 0
             };
         }

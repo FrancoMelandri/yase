@@ -26,11 +26,11 @@ namespace yase_core.Logic.Tests
         [Test]
         public void Should_long_url_be_identity () 
         {
-            Assert.AreEqual ("http://test.com/?type=1", sut.Create(new Uri(TEST_URL)).LongUrl.AbsoluteUri);
+            Assert.AreEqual ("http://test.com/?type=1", sut.Create(new Uri(TEST_URL)).OriginalUrl.AbsoluteUri);
         }
 
         [Test]
-        public void Should_reurn_tiny_url () 
+        public void Should_return_tiny_url () 
         {
             settings
                 .Setup(m => m.BaseUrl)

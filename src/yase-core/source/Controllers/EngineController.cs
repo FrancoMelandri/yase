@@ -14,10 +14,13 @@ namespace yase_core.Controllers
     public class EngineController : ControllerBase
     {
         private IHashing _hashing;
+        private IStorageServiceWrapper _storageServiceWrapper;
 
-        public EngineController(IHashing hashing) 
+        public EngineController(IHashing hashing,
+                                IStorageServiceWrapper storageServiceWrapper) 
         {
             _hashing = hashing;
+            _storageServiceWrapper = storageServiceWrapper;
         }
 
         [HttpGet]
@@ -29,7 +32,8 @@ namespace yase_core.Controllers
         [HttpPost]
         public ActionResult<HashingModel> Tiny([FromBody]HashRequest url)
         {
-            return _hashing.Create(new Uri(url.Url));
+            var hased = _hashing.Create(new Uri(url.Url));
+            return hased;
         }
     }
 }
