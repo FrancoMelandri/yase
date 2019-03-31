@@ -4,16 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using yase_storage.Logic;
+using yase_storage.Models;
+
 namespace yase_storage.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     public class StorageController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        private IMongoWrapper _mongoWrapper;
+
+        public StorageController(IMongoWrapper mongoWrapper)
         {
-            return new string[] { "value1", "value2" };
+            _mongoWrapper = mongoWrapper;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<ShortUrlModel>> Get()
+        {
+            return _mongoWrapper.GetUrls();
         }
 
         [HttpGet("{id}")]

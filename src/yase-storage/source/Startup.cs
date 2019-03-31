@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using yase_storage.Logic;
+
 namespace yase_storage
 {
     public class Startup
@@ -24,6 +26,7 @@ namespace yase_storage
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMongoWrapper, MongoWrapper>();
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
