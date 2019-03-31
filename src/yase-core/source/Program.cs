@@ -25,7 +25,6 @@ namespace yase_core
             WebHost
                 .CreateDefaultBuilder(args)
                 .UseKestrel()
-                .UseStartup<Startup>()
-                .UseUrls("http://localhost:9000");
+                .UseStartup<Startup>();
     }
 }

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: yase-core
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: yase-core
+    spec:
+      containers:
+      - name: yase-core
+        image: francomelandri/yase-core
+        ports:
+        - containerPort: 80
