@@ -8,7 +8,7 @@ namespace yase_core.Logic
         int Length { get; }
     }
 
-    class Settings : ISettings 
+    class Settings : ISettings
     {
         public string BaseUrl { get; set; } 
         public int Length { get; set; }

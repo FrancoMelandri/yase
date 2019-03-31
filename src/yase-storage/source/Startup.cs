@@ -26,9 +26,10 @@ namespace yase_storage
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IMongoWrapper, MongoWrapper>();
-            services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services
+                .AddScoped<IMongoWrapper, MongoWrapper>()
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

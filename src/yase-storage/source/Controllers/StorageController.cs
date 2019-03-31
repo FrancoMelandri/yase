@@ -26,7 +26,7 @@ namespace yase_storage.Controllers
             return _mongoWrapper.GetUrls();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{tiny}")]
         public ActionResult Get(string tiny)
         {
             return _mongoWrapper

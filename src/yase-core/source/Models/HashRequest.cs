@@ -1,6 +1,6 @@
 using System;
 
-namespace yase_core 
+namespace yase_core.Models
 {
     public class HashRequest
     {

@@ -41,6 +41,7 @@ namespace yase_storage.Logic
 
         public Option<ShortUrlModel> GetUrl(string tiny)
         {
+            System.Console.WriteLine ("TINY: {0}", tiny);
             return _shortUrls
                         .Find<ShortUrlModel>(url => url.TinyUrl == tiny)
                         .FirstOrDefault()

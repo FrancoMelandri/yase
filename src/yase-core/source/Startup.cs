@@ -35,14 +35,9 @@ namespace yase_core
             var hashingSection = Configuration.GetSection(HASHING_SECTION);
             var settings = hashingSection.Get<Settings>();
             services
-                .AddSingleton<ISettings>(settings);
-
-            var hash = new Hash();
-            services
-                .AddSingleton<IHash>(hash);
-
-            services
-                .AddSingleton<IHashing>(new Hashing(settings, hash));
+                .AddSingleton<ISettings>(settings)
+                .AddSingleton<IHash, Hash>()
+                .AddSingleton<IHashing, Hashing>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
