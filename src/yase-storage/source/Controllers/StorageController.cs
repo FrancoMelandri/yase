@@ -27,9 +27,12 @@ namespace yase_storage.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult Get(string tiny)
         {
-            return "value";
+            return _mongoWrapper
+                        .GetUrl(tiny)
+                        .Match<ActionResult>(_ => new JsonResult(_), 
+                                             () => new NotFoundResult() );
         }
 
         [HttpPost]

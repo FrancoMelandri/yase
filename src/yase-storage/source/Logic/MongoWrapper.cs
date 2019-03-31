@@ -10,6 +10,7 @@ namespace yase_storage.Logic
     public interface IMongoWrapper
     {
         List<ShortUrlModel> GetUrls();
+        Option<ShortUrlModel> GetUrl(string tiny);
     }
 
     public class MongoWrapper : IMongoWrapper
@@ -32,6 +33,14 @@ namespace yase_storage.Logic
             return _shortUrls
                         .Find(url => true)
                         .ToList();
+        }
+
+        public Option<ShortUrlModel> GetUrl(string tiny)
+        {
+            return _shortUrls
+                        .Find<ShortUrlModel>(url => url.TinylUrl == tiny)
+                        .FirstOrDefault()
+                        .ToOption();
         }
     }
 }
