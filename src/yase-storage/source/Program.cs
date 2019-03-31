@@ -25,10 +25,7 @@ namespace yase_storage
             WebHost
                 .CreateDefaultBuilder(args)
                 .UseKestrel()
-                .ConfigureServices(
-                    services => services
-                        .AddSingleton<HttpClient>(new HttpClient())
-                )
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseUrls("http://localhost:9001");
     }
 }
