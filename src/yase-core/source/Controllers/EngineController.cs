@@ -25,5 +25,11 @@ namespace yase_core.Controllers
         {
             return _hashing.Create(new Uri(url));
         }
+
+        [HttpPost]
+        public ActionResult<HashingModel> Tiny([FromBody]HashRequest url)
+        {
+            return _hashing.Create(new Uri(url.Url));
+        }
     }
 }

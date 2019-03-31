@@ -20,7 +20,7 @@ namespace yase_core.Logic
                 {
                     sBuilder.Append(data[i].ToString("x2"));
                 }
-                return sBuilder.ToString().Substring(0, length - 1);
+                return sBuilder.ToString().Substring(0, length);
             }
         }
     }
