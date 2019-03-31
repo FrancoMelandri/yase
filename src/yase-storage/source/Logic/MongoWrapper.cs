@@ -2,6 +2,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 using yase_storage.Models;
 
@@ -11,6 +12,9 @@ namespace yase_storage.Logic
     {
         List<ShortUrlModel> GetUrls();
         Option<ShortUrlModel> GetUrl(string tiny);
+        TResult GetOrUpdateUrl<TResult>(ShortUrlModel request,
+                                        Func<ShortUrlModel, TResult> onCreated,
+                                        Func<ShortUrlModel, TResult> onExisting);
     }
 
     public class MongoWrapper : IMongoWrapper
@@ -41,6 +45,18 @@ namespace yase_storage.Logic
                         .Find<ShortUrlModel>(url => url.TinyUrl == tiny)
                         .FirstOrDefault()
                         .ToOption();
+        }
+
+        public TResult GetOrUpdateUrl<TResult>(ShortUrlModel request,
+                                               Func<ShortUrlModel, TResult> onCreated,
+                                               Func<ShortUrlModel, TResult> onExisting)
+        {
+            return GetUrl(request.TinyUrl)
+                        .Match (_ => onExisting(_),
+                            () => {
+                                _shortUrls.InsertOne(request);
+                                return onCreated(request);
+                            });
         }
     }
 }

@@ -36,8 +36,13 @@ namespace yase_storage.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody]ShortUrlRequest value)
         {
+            var mapped = value.To();
+            return _mongoWrapper
+                        .GetOrUpdateUrl<ActionResult>(mapped,
+                                        _ => new JsonResult(_.To()), 
+                                        _ => new ConflictResult() );
         }
 
         [HttpDelete("{id}")]

@@ -9,6 +9,15 @@ namespace yase_storage.Models
                 OriginalUrl = model.OriginalUrl,
                 TinyUrl = model.TinyUrl
             };
+        }
+
+        public static ShortUrlModel To(this ShortUrlRequest model)
+        {
+            return new ShortUrlModel
+            {
+                OriginalUrl = model.OriginalUrl,
+                TinyUrl = model.TinyUrl
+            };
         }        
     }
 }
