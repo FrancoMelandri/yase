@@ -13,6 +13,6 @@ namespace yase_storage.Models
         public string OriginalUrl { get; set; }
 
         [BsonElement("tinyUrl")]
-        public string TinylUrl { get; set; }
+        public string TinyUrl { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace yase_storage.Controllers
         {
             return _mongoWrapper
                         .GetUrl(tiny)
-                        .Match<ActionResult>(_ => new JsonResult(_), 
+                        .Match<ActionResult>(_ => new JsonResult(_.To()), 
                                              () => new NotFoundResult() );
         }
 
