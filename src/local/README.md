@@ -15,6 +15,7 @@ first of all you have to build all the images (these commands are valid starting
 ```bash
 $ docker build -t yase-core ../yase-core/source
 $ docker build -t yase-storage ../yase-storage/source
+$ docker build -t yase-ui ../yase-ui
 ```
 
  Now you can run docker compose to start up all the application's layer, starting from local folder

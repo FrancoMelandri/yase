@@ -17,7 +17,17 @@ services:
     network_mode: "host"
     ports:
       - "9001:9001"
+  yase-ui:
+    image: yase-ui
+    volumes:
+      - '../yase-ui/:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8080:3000'
+    environment:
+      - NODE_ENV=development
 
 volumes:
    mongodata:
+   
 

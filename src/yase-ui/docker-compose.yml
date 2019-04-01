@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+
+  yase-ui:
+    image: yase-ui
+    # container_name: yase-ui
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8080:3000'
+    environment:
+      - NODE_ENV=development
+
