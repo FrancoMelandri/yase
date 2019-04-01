@@ -38,6 +38,8 @@ namespace yase_core
                 .AddSingleton<ISettings>(settings)
                 .AddSingleton<IHash, Hash>()
                 .AddSingleton<IHashing, Hashing>()
+                .AddSingleton<IWebRequestFactory, WebRequestFactory>()
+                .AddSingleton<IHttpRequests, HttpRequests>()
                 .AddSingleton<IStorageServiceWrapper, StorageServiceWrapper>();
         }
 

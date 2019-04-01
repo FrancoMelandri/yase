@@ -30,10 +30,13 @@ namespace yase_core.Controllers
         }
 
         [HttpPost]
-        public ActionResult<HashingModel> Tiny([FromBody]HashRequest url)
+        public ActionResult Tiny([FromBody]HashRequest url)
         {
             var hased = _hashing.Create(new Uri(url.Url));
-            return hased;
+            return _storageServiceWrapper
+                        .GetOrInsert(hased.To())
+                        .Match<ActionResult>(_ => new JsonResult(_), 
+                                             () => new NotFoundResult() );
         }
     }
 }
