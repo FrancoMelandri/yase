@@ -1,3 +1,5 @@
+using System;
+
 namespace yase_core.Models
 {
     public static class ShortUrlModelExtension
@@ -8,6 +10,16 @@ namespace yase_core.Models
             {
                 OriginalUrl = model.OriginalUrl.AbsoluteUri,
                 TinyUrl = model.HashedUrl
+            };
+        }
+
+        public static HashingModel To(this ShortUrl model, string baseUrl)
+        {
+            return new HashingModel 
+            {
+                OriginalUrl = new Uri(model.OriginalUrl),
+                TinyUrl = new Uri(string.Format("{0}/{1}", baseUrl, model.TinyUrl)),
+                HashedUrl = model.TinyUrl
             };
         }
     }

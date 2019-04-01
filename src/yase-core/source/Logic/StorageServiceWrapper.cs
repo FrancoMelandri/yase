@@ -8,6 +8,7 @@ namespace yase_core.Logic
 {
     public interface IStorageServiceWrapper
     {
+        Option<ShortUrl> Get(string hash);
         Option<ShortUrl> GetOrInsert(ShortUrl shortUrl);
     }
 
@@ -22,6 +23,17 @@ namespace yase_core.Logic
         {
             _httpRequests = httpRequests;
             _storageBaseUrl = config.GetConnectionString(STORAGE_BASE_URL);
+        }
+
+        public Option<ShortUrl> Get(string hash)
+        {
+            var requesturl = string.Format ("{0}/Storage/{1}",  
+                                            _storageBaseUrl,
+                                            hash);
+            return _httpRequests
+                        .Get(requesturl)
+                        .FromJson<ShortUrl>()
+                        .ToOption();
         }
 
         public Option<ShortUrl> GetOrInsert(ShortUrl tiny)

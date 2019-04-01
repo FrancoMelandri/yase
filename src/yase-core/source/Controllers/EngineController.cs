@@ -13,29 +13,42 @@ namespace yase_core.Controllers
     [ApiController]
     public class EngineController : ControllerBase
     {
+        private ISettings _settings;
         private IHashing _hashing;
         private IStorageServiceWrapper _storageServiceWrapper;
+        private IUrlHandler _urlHandler;
 
-        public EngineController(IHashing hashing,
+        public EngineController(ISettings settings,
+                                IHashing hashing,
+                                IUrlHandler urlHandler,
                                 IStorageServiceWrapper storageServiceWrapper) 
         {
+            _settings = settings;
             _hashing = hashing;
+            _urlHandler = urlHandler;
             _storageServiceWrapper = storageServiceWrapper;
         }
 
         [HttpPost]
-        public ActionResult<HashingModel> Get([FromBody]HashRequest url)
+        public ActionResult Get([FromBody]HashRequest url)
         {
-            return _hashing.Create(new Uri(url.Url));
+            var hash = _urlHandler
+                        .GetHash(url.Url)
+                        .Match(_ => _,
+                               () => string.Empty);
+            return _storageServiceWrapper
+                        .Get(hash)
+                        .Match<ActionResult>(_ => new JsonResult(_.To(_settings.BaseUrl)), 
+                                             () => new NotFoundResult() );
         }
 
-        [HttpPost]
+        [HttpPut]
         public ActionResult Tiny([FromBody]HashRequest url)
         {
             var hased = _hashing.Create(new Uri(url.Url));
             return _storageServiceWrapper
                         .GetOrInsert(hased.To())
-                        .Match<ActionResult>(_ => new JsonResult(_), 
+                        .Match<ActionResult>(_ => new JsonResult(_.To(_settings.BaseUrl)), 
                                              () => new NotFoundResult() );
         }
     }
