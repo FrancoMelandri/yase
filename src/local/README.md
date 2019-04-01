@@ -6,6 +6,8 @@
 
 Here you can find the instruction to run the entire project in your local environment.
 
+You must have installed ***Docker*** in order to start the entire stack using docker compose. If you wanna use the K8s style you have to install **minikube** and **Kubectl**.
+
 
 
 ## Docker compose
@@ -25,6 +27,10 @@ $ docker-compose up
 ```
 
 The application stack is up and running on your local machine so you can try to perform some request in order to check the functionalities.
+
+The entry point is the web application running at http://localhost:8080
+
+You can also call directly the core service (**yase-core**) at the address http://localhost:9000 and the storage service (**yase-storage**) at the address http://localhost:9001
 
 
 
