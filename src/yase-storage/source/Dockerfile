@@ -11,6 +11,6 @@ FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-EXPOSE 9000
+EXPOSE 9001
 
-ENTRYPOINT ["dotnet", "yase-core.dll"]
+ENTRYPOINT ["dotnet", "yase-storage.dll"]
