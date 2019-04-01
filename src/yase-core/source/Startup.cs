@@ -40,7 +40,8 @@ namespace yase_core
                 .AddSingleton<IHashing, Hashing>()
                 .AddSingleton<IWebRequestFactory, WebRequestFactory>()
                 .AddSingleton<IHttpRequests, HttpRequests>()
-                .AddSingleton<IStorageServiceWrapper, StorageServiceWrapper>();
+                .AddSingleton<IStorageServiceWrapper, StorageServiceWrapper>()
+                .AddSingleton<IUrlHandler, UrlHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

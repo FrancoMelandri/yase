@@ -23,10 +23,10 @@ namespace yase_core.Controllers
             _storageServiceWrapper = storageServiceWrapper;
         }
 
-        [HttpGet]
-        public ActionResult<HashingModel> Get(string url)
+        [HttpPost]
+        public ActionResult<HashingModel> Get([FromBody]HashRequest url)
         {
-            return _hashing.Create(new Uri(url));
+            return _hashing.Create(new Uri(url.Url));
         }
 
         [HttpPost]
