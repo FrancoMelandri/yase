@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: yase-storage
   name: yase-storage
 spec:
+  type: NodePort
   ports:
   - name: "9001"
     port: 9001

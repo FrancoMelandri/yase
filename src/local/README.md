@@ -38,12 +38,42 @@ You can also call directly the core service (**yase-core**) at the address http:
 
 On the other way we can deploy all the application's service on a minikube cluster; this is the similar way we are going to expected to have in production.
 
-Using the **kompose** utility(<http://kompose.io/> we can generate all the resources file we need to setup the kubernetes cluster.
+Using the **kompose** utility(<http://kompose.io/> we can generate all the resources file we need to setup the kubernetes cluster. In order to run theweb application under minikube we have to change the yase-ui-service using NodePort as type, that is the only one supported (<https://kubernetes.io/docs/concepts/services-networking/service/>)
 
 ```bash
 $ kompose convert
 ```
 
+Once the minikube cluster is up after the command
 
+```bash
+$ minikube start
+```
 
-Once the minikube cluster is up 
+We can create all the resources inside the cluster using the **kubectl** utility
+
+```bash
+$ minikube apply -f filename.yaml
+```
+
+Once the resources are created we can ask minikube for the external address of the web application invoking the command
+
+```bash
+$ minikube service yase-ui --url
+```
+
+ 
+
+Command to update the rollout a new image after an upgrade
+
+```bash
+$ kubectl rollout status deployment.apps/yase-ui
+```
+
+If youu wanna check the status of the entire stack running you can use the command 
+
+```bash
+$ minikube dashboard
+```
+
+ 

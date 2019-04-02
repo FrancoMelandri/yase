@@ -15,6 +15,8 @@ namespace yase_core.Logic
     class StorageServiceWrapper : IStorageServiceWrapper
     {
         private const string STORAGE_BASE_URL = "StorageService";
+        private const string STORAGE_HOST = "YASE_STORAGE_SERVICE_HOST";
+        private const string STORAGE_PORT = "YASE_STORAGE_SERVICE_PORT";
         private IHttpRequests _httpRequests;
         private string _storageBaseUrl;
 
@@ -23,6 +25,11 @@ namespace yase_core.Logic
         {
             _httpRequests = httpRequests;
             _storageBaseUrl = config.GetConnectionString(STORAGE_BASE_URL);
+
+            var hostStorage = System.Environment.GetEnvironmentVariable(STORAGE_HOST);
+            var portStorage = System.Environment.GetEnvironmentVariable(STORAGE_PORT);
+            if (string.IsNullOrEmpty(hostStorage) || string.IsNullOrEmpty(portStorage))
+                _storageBaseUrl = string.Format("http://{0}:{1}", hostStorage, portStorage);
         }
 
         public Option<ShortUrl> Get(string hash)

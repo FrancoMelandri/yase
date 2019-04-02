@@ -9,10 +9,12 @@ metadata:
     io.kompose.service: yase-core
   name: yase-core
 spec:
+  type: NodePort
   ports:
   - name: "9000"
     port: 9000
     targetPort: 9000
+    nodePort: 30000
   selector:
     io.kompose.service: yase-core
 status:

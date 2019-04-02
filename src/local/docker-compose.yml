@@ -12,6 +12,9 @@ services:
     network_mode: "host"
     ports:
       - "9000:9000"
+    environment:
+      - YASE_STORAGE_SERVICE_HOST=localhost
+      - YASE_STORAGE_SERVICE_PORT=9001
   yase-storage:
     image: francomelandri/yase-storage
     network_mode: "host"
@@ -23,6 +26,8 @@ services:
       - '8080:3000'
     environment:
       - NODE_ENV=development
+      - YASE_CORE_SERVICE_HOST=localhost
+      - YASE_CORE_SERVICE_PORT=9000
 
 volumes:
    mongodata:

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 const axios = require('axios')
+const endpoint = require('./config').default
 
 class App extends Component {
 
@@ -17,7 +18,7 @@ class App extends Component {
   }
  
   onCreate(event) {
-     axios.put('http://localhost:9000/engine', {
+     axios.put(endpoint.URL + '/engine', {
       Url: this.state.originalUrl
     }).then(response => {
       this.setState ({ shortUrl: response.data.tinyUrl })
@@ -25,7 +26,7 @@ class App extends Component {
   }
 
   onInfo(event) {
-    axios.post('http://localhost:9000/engine', {
+    axios.post(endpoint.URL + '/engine', {
      Url: this.state.originalUrl
    }).then(response => {
      this.setState ({ shortUrl: response.data.originalUrl })
