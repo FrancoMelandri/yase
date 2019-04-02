@@ -7,7 +7,7 @@
   height: 100px;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(16px + 2vmin);
   color: white;
 }
 
@@ -43,10 +43,14 @@
   width:100px;
   margin-top: 40px;
   margin-left: 20px;
+  border: 1;
+  background: none;
+  box-shadow: none;
+  border-radius: 0px;
 }
 
 .App-label {
-  font-size: 16pt;
+  font-size: 14pt;
   margin-top: 40px;
   color: black;
 }

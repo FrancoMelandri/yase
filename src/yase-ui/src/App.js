@@ -20,7 +20,7 @@ class App extends Component {
      axios.put('http://localhost:9000/engine', {
       Url: this.state.originalUrl
     }).then(response => {
-      this.setState ( { shortUrl: response.data.tinyUrl})
+      this.setState ({ shortUrl: response.data.tinyUrl })
     }).catch (error => { alert(error)})
   }
 
@@ -28,7 +28,7 @@ class App extends Component {
     axios.post('http://localhost:9000/engine', {
      Url: this.state.originalUrl
    }).then(response => {
-     this.setState ( { shortUrl: response.data.originalUrl})
+     this.setState ({ shortUrl: response.data.originalUrl })
    }).catch (error => { alert(error)})
  }
 
