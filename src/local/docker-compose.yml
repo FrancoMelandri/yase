@@ -8,7 +8,7 @@ services:
     volumes:
       - 'mongodata:/data/db'
   yase-core:
-    image: francomelandri/yase-core
+    image: yase-core
     network_mode: "host"
     ports:
       - "9000:9000"
@@ -16,12 +16,12 @@ services:
       - YASE_STORAGE_SERVICE_HOST=localhost
       - YASE_STORAGE_SERVICE_PORT=9001
   yase-storage:
-    image: francomelandri/yase-storage
+    image: yase-storage
     network_mode: "host"
     ports:
       - "9001:9001"
   yase-ui:
-    image: francomelandri/yase-ui
+    image: yase-ui
     ports:
       - '8080:3000'
     environment:
