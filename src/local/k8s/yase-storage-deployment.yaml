@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: yase-storage
+  name: yase-storage
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: yase-storage
+    spec:
+      containers:
+      - image: francomelandri/yase-storage
+        name: yase-storage
+        ports:
+        - containerPort: 9001
+        resources: {}
+      restartPolicy: Always
+status: {}

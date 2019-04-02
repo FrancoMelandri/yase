@@ -38,3 +38,12 @@ You can also call directly the core service (**yase-core**) at the address http:
 
 On the other way we can deploy all the application's service on a minikube cluster; this is the similar way we are going to expected to have in production.
 
+Using the **kompose** utility(<http://kompose.io/> we can generate all the resources file we need to setup the kubernetes cluster.
+
+```bash
+$ kompose convert
+```
+
+
+
+Once the minikube cluster is up 
