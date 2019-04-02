@@ -19,6 +19,7 @@ namespace yase_core
     public class Startup
     {
         const string HASHING_SECTION = "Hashing";
+        const string CORS_POLICY  = "CorsPolicy";
 
         public Startup(IConfiguration configuration)
         {
@@ -31,7 +32,7 @@ namespace yase_core
         {
             services.AddCors(options =>
                 {
-                    options.AddPolicy("CorsPolicy",
+                    options.AddPolicy(CORS_POLICY,
                         builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
@@ -64,7 +65,7 @@ namespace yase_core
             {
                 app.UseHsts();
             }
-            app.UseCors("CorsPolicy");
+            app.UseCors(CORS_POLICY);
             app.UseMvc();
         }
     }

@@ -13,6 +13,7 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.onCreate = this.onCreate.bind(this);
+    this.onInfo = this.onInfo.bind(this);
   }
  
   onCreate(event) {
@@ -23,7 +24,15 @@ class App extends Component {
     }).catch (error => { alert(error)})
   }
 
-  handleChange(event) {
+  onInfo(event) {
+    axios.post('http://localhost:9000/engine', {
+     Url: this.state.originalUrl
+   }).then(response => {
+     this.setState ( { shortUrl: response.data.originalUrl})
+   }).catch (error => { alert(error)})
+ }
+
+ handleChange(event) {
     this.setState({ originalUrl: event.target.value });
   }
 
@@ -35,19 +44,28 @@ class App extends Component {
         </header>
         <div className="App-body">
             <span className="App-label">Insert URL</span>
-            <span><input type="text" 
+            <span>
+                <input type="text" 
                    className="App-text"
                    value={this.state.originalUrl} 
                    onChange={this.handleChange} >
-                   </input>
+                </input>
             </span>
-            <span><button id="create" 
-                    className="App-button" 
-                    onClick={this.onCreate}>Create</button>
-            </span>
-            <span className="App-label">
-              {this.state.shortUrl}
-            </span>
+            <div>
+              <span>
+                  <button id="create" 
+                      className="App-button" 
+                      onClick={this.onCreate}>Create
+                  </button>
+                  <button id="info" 
+                      className="App-button" 
+                      onClick={this.onInfo}>Info
+                  </button>
+              </span>
+            </div>
+            <div className="App-label">
+                <a href={this.state.shortUrl}>{this.state.shortUrl}</a>
+            </div>
         </div>
         <footer className="App-footer">
         </footer>
