@@ -45,6 +45,7 @@ namespace yase_storage
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors();
         }
     }
 }

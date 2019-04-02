@@ -30,7 +30,7 @@ namespace yase_core.Controllers
         }
 
         [HttpPost]
-        public ActionResult Get([FromBody]HashRequest url)
+        public ActionResult Get(HashRequest url)
         {
             var hash = _urlHandler
                         .GetHash(url.Url)

@@ -4,9 +4,27 @@ const axios = require('axios')
 
 class App extends Component {
 
-  onCreate() {
-    alert('Here I am')
-    axios.get('http://www.google.com')
+  constructor(props) {
+    super(props);
+    this.state = { 
+      originalUrl: 'http://www.example.con',
+      shortUrl: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.onCreate = this.onCreate.bind(this);
+  }
+ 
+  onCreate(event) {
+     axios.put('http://localhost:9000/engine', {
+      Url: this.state.originalUrl
+    }).then(response => {
+      this.setState ( { shortUrl: response.data.tinyUrl})
+    }).catch (error => { alert(error)})
+  }
+
+  handleChange(event) {
+    this.setState({ originalUrl: event.target.value });
   }
 
   render() {
@@ -17,8 +35,19 @@ class App extends Component {
         </header>
         <div className="App-body">
             <span className="App-label">Insert URL</span>
-            <span><input type="text" className="App-text"></input></span>
-            <span><button id="create" className="App-button" onClick={this.onCreate}>Create</button></span>
+            <span><input type="text" 
+                   className="App-text"
+                   value={this.state.originalUrl} 
+                   onChange={this.handleChange} >
+                   </input>
+            </span>
+            <span><button id="create" 
+                    className="App-button" 
+                    onClick={this.onCreate}>Create</button>
+            </span>
+            <span className="App-label">
+              {this.state.shortUrl}
+            </span>
         </div>
         <footer className="App-footer">
         </footer>
