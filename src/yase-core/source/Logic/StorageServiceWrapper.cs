@@ -30,6 +30,7 @@ namespace yase_core.Logic
             var portStorage = System.Environment.GetEnvironmentVariable(STORAGE_PORT);
             if (string.IsNullOrEmpty(hostStorage) || string.IsNullOrEmpty(portStorage))
                 _storageBaseUrl = string.Format("http://{0}:{1}", hostStorage, portStorage);
+            System.Console.WriteLine(">>>>>>>>>>> " + _storageBaseUrl);
         }
 
         public Option<ShortUrl> Get(string hash)
