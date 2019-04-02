@@ -14,7 +14,7 @@ spec:
   - name: "9000"
     port: 9000
     targetPort: 9000
-    nodePort: 30000
+    nodePort: 30001
   selector:
     io.kompose.service: yase-core
 status:

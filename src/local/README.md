@@ -56,13 +56,45 @@ We can create all the resources inside the cluster using the **kubectl** utility
 $ minikube apply -f filename.yaml
 ```
 
+At the end of the command list we can check the minikube cluster status
+
+```bash
+$ minikube get all
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/mongodb-66f65d79cd-cqtjh        1/1     Running   0          5m45s
+pod/yase-core-58f8dc4889-xdkkj      1/1     Running   0          67s
+pod/yase-storage-55db8776bd-jtxz6   1/1     Running   0          3m23s
+pod/yase-ui-69cfc6f749-hrt8d        1/1     Running   0          97m
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes     ClusterIP   10.96.0.1       <none>        443/TCP          101m
+service/mongodb        ClusterIP   10.109.37.22    <none>        27017/TCP        5m38s
+service/yase-core      NodePort    10.99.169.154   <none>        9000:30001/TCP   14s
+service/yase-storage   NodePort    10.108.7.131    <none>        9001:30669/TCP   3m17s
+service/yase-ui        NodePort    10.96.253.232   <none>        8080:30000/TCP   94m
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mongodb        1/1     1            1           5m45s
+deployment.apps/yase-core      1/1     1            1           67s
+deployment.apps/yase-storage   1/1     1            1           3m23s
+deployment.apps/yase-ui        1/1     1            1           97m
+
+NAME                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/mongodb-66f65d79cd        1         1         1       5m45s
+replicaset.apps/yase-core-58f8dc4889      1         1         1       67s
+replicaset.apps/yase-storage-55db8776bd   1         1         1       3m23s
+replicaset.apps/yase-ui-69cfc6f749        1         1         1       97m
+
+```
+
 Once the resources are created we can ask minikube for the external address of the web application invoking the command
 
 ```bash
 $ minikube service yase-ui --url
+$ minikube service yase-core --url
 ```
 
- 
+
 
 Command to update the rollout a new image after an upgrade
 
@@ -74,6 +106,12 @@ If youu wanna check the status of the entire stack running you can use the comma
 
 ```bash
 $ minikube dashboard
+```
+
+If you wanna enter in intercative mode with bash in a pod you can type the command
+
+```bash
+$  kubectl exec -it yase-ui-69cfc6f749-hrt8d /bin/bash
 ```
 
  
