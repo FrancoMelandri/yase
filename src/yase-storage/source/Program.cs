@@ -26,6 +26,6 @@ namespace yase_storage
                 .CreateDefaultBuilder(args)
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .UseUrls("http://0.0.0.0:9001");
+                .UseUrls("http://localhost:9001");
     }
 }

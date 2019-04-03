@@ -28,8 +28,9 @@ namespace yase_core.Logic
 
             var hostStorage = System.Environment.GetEnvironmentVariable(STORAGE_HOST);
             var portStorage = System.Environment.GetEnvironmentVariable(STORAGE_PORT);
-            if (string.IsNullOrEmpty(hostStorage) || string.IsNullOrEmpty(portStorage))
+            if (!string.IsNullOrEmpty(hostStorage) && !string.IsNullOrEmpty(portStorage)) {
                 _storageBaseUrl = string.Format("http://{0}:{1}", hostStorage, portStorage);
+            }
         }
 
         public Option<ShortUrl> Get(string hash)
