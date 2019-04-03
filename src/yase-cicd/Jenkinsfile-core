@@ -1,7 +1,7 @@
 script {
     env.DOCKER_IMG = 'test'
 } 
-pipelines {
+pipeline {
     agent any
 
     stages {
