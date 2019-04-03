@@ -43,7 +43,7 @@ namespace yase_core.Controllers
         }
 
         [HttpPut]
-        public ActionResult Tiny([FromBody]HashRequest url)
+        public ActionResult Tiny(HashRequest url)
         {
             var hased = _hashing.Create(new Uri(url.Url));
             return _storageServiceWrapper
