@@ -69,7 +69,7 @@ As you can see the response contains informations about the **tinyUrl**l generat
 
 ### URL match
 
-Calling the same resources using the **POST** HTTP verb we are able to retrieve the original URL associated to a tiny URL previously created.
+Calling the same resource using the **POST** HTTP verb we are able to retrieve the original URL associated to a tiny URL previously created.
 
 ```bash
 $ curl -X POST \
@@ -89,7 +89,7 @@ $ curl -X POST \
 
 ### URL delete
 
-Calling the same resources using the **DELETE** HTTP verb we are able to remove the original URL associated to a tiny URL previously created.
+Calling the same resource using the **DELETE** HTTP verb we are able to remove the original URL associated to a tiny URL previously created.
 
 ```bash
 $ curl -X DELETE \

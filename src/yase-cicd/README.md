@@ -16,6 +16,6 @@ Once you have setup the **Jenkins** server without any kind of plugin, you are a
 
 
 
-In the repository you can fine the one pipeline for each component of the application stack.
+In the repository you can fine one pipeline for each component belong to the application stack.
 
 For the moment I have disable the Deploy phase leaving only the continuous integration that perform **test**, **build** and the image **publish** in docker hub. 

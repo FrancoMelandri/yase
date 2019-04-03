@@ -102,7 +102,7 @@ Command to update the rollout a new image after an upgrade
 $ kubectl rollout status deployment.apps/yase-ui
 ```
 
-If youu wanna check the status of the entire stack running you can use the command 
+If you wanna check the status of the entire stack running you can use the command 
 
 ```bash
 $ minikube dashboard
