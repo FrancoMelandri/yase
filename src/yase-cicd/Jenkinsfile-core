@@ -16,9 +16,9 @@ pipeline {
             steps {
                 dir("src") {
                     dir ("yase-core") {
-                        sh "docker build -t yase-core-tests"
-                    }
-                    script {
+                        script {
+                            sh "docker build -t yase-core-tests"
+                        }
                     }
                 }
             }
@@ -28,9 +28,9 @@ pipeline {
             steps {
                 dir("src") {
                     dir ("yase-core") {
-                        sh "docker build -t yase-core"
-                    }
-                    script {
+                        script {
+                            sh "docker build -t yase-core"
+                        }
                     }
                 }
             }
@@ -38,9 +38,11 @@ pipeline {
 
         stage ("Publis") {
             steps {
-                sh "docker tag yase-core francomelandri/yase-core"
-//                sh "docker login"
-//                sh "docker push francomelandri/yase-core"
+                script {
+                    sh "docker tag yase-core francomelandri/yase-core"
+    //                sh "docker login"
+    //                sh "docker push francomelandri/yase-core"
+                }
             }
         }
     }
