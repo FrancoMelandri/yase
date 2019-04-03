@@ -45,9 +45,13 @@ namespace yase_storage.Controllers
                                         _ => new ConflictResult() );
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{tiny}")]
+        public ActionResult Delete(string tiny)
         {
+            return _mongoWrapper
+                        .DeleteUrl(tiny)
+                        .Match<ActionResult>(_ => new OkResult(), 
+                                             () => new NotFoundResult() );
         }
     }
 }

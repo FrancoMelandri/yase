@@ -7,7 +7,8 @@ namespace yase_storage.Models
             return new ShortUrl 
             {
                 OriginalUrl = model.OriginalUrl,
-                TinyUrl = model.TinyUrl
+                TinyUrl = model.TinyUrl,
+                Ttl = model.Ttl
             };
         }
 
@@ -16,7 +17,8 @@ namespace yase_storage.Models
             return new ShortUrlModel
             {
                 OriginalUrl = model.OriginalUrl,
-                TinyUrl = model.TinyUrl
+                TinyUrl = model.TinyUrl,
+                Ttl = model.ttl
             };
         }        
     }

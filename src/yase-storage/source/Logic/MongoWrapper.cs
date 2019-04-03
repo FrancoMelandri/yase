@@ -15,6 +15,7 @@ namespace yase_storage.Logic
         TResult GetOrUpdateUrl<TResult>(ShortUrlModel request,
                                         Func<ShortUrlModel, TResult> onCreated,
                                         Func<ShortUrlModel, TResult> onExisting);
+        Option<long> DeleteUrl(string tiny);
     }
 
     public class MongoWrapper : IMongoWrapper
@@ -57,6 +58,15 @@ namespace yase_storage.Logic
                                 _shortUrls.InsertOne(request);
                                 return onCreated(request);
                             });
+        }
+
+        public Option<long> DeleteUrl(string tiny)
+        {
+            return _shortUrls
+                        .DeleteOne(url => url.TinyUrl == tiny)
+                        .DeletedCount
+                        .ToOption();
+
         }
     }
 }

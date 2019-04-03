@@ -14,13 +14,15 @@ namespace yase_storage.Models.Tests
             {
                 Id = "123",
                 OriginalUrl = "OriginalUrl",
-                TinyUrl = "TinyUrl"
+                TinyUrl = "TinyUrl",
+                Ttl = 1234
             };
 
             var mapped = model.To();
 
             Assert.AreEqual ("OriginalUrl", mapped.OriginalUrl);
             Assert.AreEqual ("TinyUrl", mapped.TinyUrl);
+            Assert.AreEqual(1234, mapped.Ttl);
         }
 
         [Test]
@@ -29,7 +31,8 @@ namespace yase_storage.Models.Tests
             var model = new ShortUrlRequest
             {
                 OriginalUrl = "OriginalUrl",
-                TinyUrl = "TinyUrl"
+                TinyUrl = "TinyUrl",
+                ttl = 1234
             };
 
             var mapped = model.To();
@@ -37,6 +40,7 @@ namespace yase_storage.Models.Tests
             Assert.AreEqual (null, mapped.Id);
             Assert.AreEqual ("OriginalUrl", mapped.OriginalUrl);
             Assert.AreEqual ("TinyUrl", mapped.TinyUrl);
+            Assert.AreEqual(1234, mapped.Ttl);
         }
     }
 }

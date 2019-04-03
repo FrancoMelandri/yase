@@ -8,12 +8,14 @@ namespace yase_core.Logic
     {
         string Post(string url, string json);
         string Get(string url);
+        string Delete(string url);
     }
 
     public class HttpRequests : IHttpRequests
     {
         private const string POST = "POST";
         private const string GET = "GET";
+        private const string DELETE = "DELETE";
         private IWebRequestFactory _webRequestFactory;
 
         public HttpRequests(IWebRequestFactory webRequestFactory)
@@ -30,6 +32,11 @@ namespace yase_core.Logic
         public string Get(string url)
         {
             var request = _webRequestFactory.Create(url, GET, string.Empty);
+            return MakeRestCall(request);
+        }
+        public string Delete(string url)
+        {
+            var request = _webRequestFactory.Create(url, DELETE, string.Empty);
             return MakeRestCall(request);
         }
 

@@ -14,5 +14,8 @@ namespace yase_storage.Models
 
         [BsonElement("tinyUrl")]
         public string TinyUrl { get; set; }
+
+        [BsonElement("ttl")]
+        public long Ttl { get; set; }
     }
 }

@@ -51,5 +51,19 @@ namespace yase_core.Controllers
                         .Match<ActionResult>(_ => new JsonResult(_.To(_settings.BaseUrl)), 
                                              () => new NotFoundResult() );
         }
+
+        [HttpDelete]
+        public ActionResult Delete(HashRequest url)
+        {
+            var hash = _urlHandler
+                        .GetHash(url.Url)
+                        .Match(_ => _,
+                               () => string.Empty);
+            return _storageServiceWrapper
+                        .Delete(hash)
+                        .Match<ActionResult>(_ => new OkResult(), 
+                                             () => new NotFoundResult() );
+        }
+
     }
 }

@@ -9,7 +9,8 @@ namespace yase_core.Models
             return new ShortUrl 
             {
                 OriginalUrl = model.OriginalUrl.AbsoluteUri,
-                TinyUrl = model.HashedUrl
+                TinyUrl = model.HashedUrl,
+                ttl = model.ttl
             };
         }
 

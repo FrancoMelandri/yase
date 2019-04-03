@@ -10,6 +10,7 @@ namespace yase_core.Logic
     {
         Option<ShortUrl> Get(string hash);
         Option<ShortUrl> GetOrInsert(ShortUrl shortUrl);
+        Option<Boolean> Delete(string hash);
     }
 
     class StorageServiceWrapper : IStorageServiceWrapper
@@ -53,6 +54,21 @@ namespace yase_core.Logic
                               tiny.ToJson())
                         .FromJson<ShortUrl>()
                         .ToOption();
+        }
+
+        public Option<Boolean> Delete(string hash)
+        {
+            var requesturl = string.Format ("{0}/Storage/{1}",  
+                                            _storageBaseUrl,
+                                            hash);
+            try {
+                _httpRequests
+                        .Delete(requesturl);
+                return Option.Some<Boolean>(true);
+            }
+            catch {
+                return Option.None<Boolean>();
+            }
         }
     }
 }

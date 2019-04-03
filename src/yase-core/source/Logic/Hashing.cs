@@ -34,6 +34,7 @@ namespace yase_core.Logic
                 TinyUrl = tinyUrl,
                 OriginalUrl = url,
                 HashedUrl = hashed,
+                ttl = System.DateTime.Now.Ticks + System.TimeSpan.TicksPerMinute * _settings.ttl,
                 Hitted = 0
             };
         }
