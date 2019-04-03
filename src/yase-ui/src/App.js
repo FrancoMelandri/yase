@@ -15,6 +15,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onCreate = this.onCreate.bind(this);
     this.onInfo = this.onInfo.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
  
   onCreate(event) {
@@ -22,16 +23,34 @@ class App extends Component {
       Url: this.state.originalUrl
     }).then(response => {
       this.setState ({ shortUrl: response.data.tinyUrl })
-    }).catch (error => { alert(error)})
+    }).catch (error => { 
+      alert(error)
+    })
   }
 
   onInfo(event) {
     axios.post(endpoint.URL + '/engine', {
-     Url: this.state.originalUrl
-   }).then(response => {
-     this.setState ({ shortUrl: response.data.originalUrl })
-   }).catch (error => { alert(error)})
- }
+      Url: this.state.originalUrl
+    }).then(response => {
+      this.setState ({ shortUrl: response.data.originalUrl })
+    }).catch (error => { 
+      alert(error)
+    })
+  }
+
+  onDelete(event) {
+    axios({
+      method: 'DELETE',
+      url: endpoint.URL + '/engine', 
+      data:{
+      Url: this.state.originalUrl
+      }
+    }).then(_ => {
+      this.setState ({ shortUrl: '' })
+    }).catch (error => { 
+      alert(error)
+    })
+  }
 
  handleChange(event) {
     this.setState({ originalUrl: event.target.value });
@@ -61,6 +80,10 @@ class App extends Component {
                   <button id="info" 
                       className="App-button" 
                       onClick={this.onInfo}>Info
+                  </button>
+                  <button id="delete" 
+                      className="App-button" 
+                      onClick={this.onDelete}>Delete
                   </button>
               </span>
             </div>

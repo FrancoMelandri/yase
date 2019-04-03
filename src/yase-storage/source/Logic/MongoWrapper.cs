@@ -62,10 +62,11 @@ namespace yase_storage.Logic
 
         public Option<long> DeleteUrl(string tiny)
         {
-            return _shortUrls
+            var conunt = _shortUrls
                         .DeleteOne(url => url.TinyUrl == tiny)
-                        .DeletedCount
-                        .ToOption();
+                        .DeletedCount;
+            return 
+                        conunt.ToOption();
 
         }
     }

@@ -49,15 +49,17 @@ $ kubectl create -f ./k8s/service.yaml
 
 
 
+## Resources
+
 ### URL retrieve
 
-using the API **/storage/{tinyUrl}** we are able to retrieve the tiny URL stored
+using the API **/storage/{tinyUrl}** using **GET** verb, we are able to retrieve the tiny URL stored
 
 ```bash
 $ curl -X GET \
   	http://localhost:9001/storage/075cd98 \
   	-H 'cache-control: no-cache' \
-  	-H 'content-type: application/json' \
+  	-H 'content-type: application/json'
 
 ---
 
@@ -68,19 +70,37 @@ $ curl -X GET \
 
 ### URL store
 
-Calling the same resources using the POST HTTP verb we are able to retrieve the original URL associated to a tiny URL previously created.
+Calling the resources **/starge** using the **POST** HTTP verb we are able to store the information in the DB.
 
 ```bash
 $ curl -X POST \
-      http://localhost:9000/engine \
+      http://localhost:9001/storage \
       -H 'cache-control: no-cache' \
       -H 'content-type: application/json' \
       -d '{
-        "url": "http://base.com/69208a74"
+        "originalUrl": "https://www.example.com/param1=1&param2=2&param3=3&param4=4"
+        "tinyUrl": "69208a74"
     }'
  
  ---
  
- {"tinyUrl":"http://base.com/69208a7","originalUrl":"https://www.example.com/param1=1&param2=2&param3=3&param4=4"}
+ {"tinyUrl":"http://base.com/69208a7","originalUrl":"https://www.example.com/param1=1&param2=2&param3=3&param4=4","hashedUrl":"69208a7","hitted":0}
+```
+
+
+
+### URL delete
+
+Calling the resource **/storage/{tinyUrl}** using the **DELETE** HTTP verb we are able to remove the original URL associated to a tiny URL previously created.
+
+```bash
+$ curl -X DELETE \
+      http://localhost:9001/storage/075cd98 \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' 
+ 
+ ---
+ 
+ 200 OK
 ```
 

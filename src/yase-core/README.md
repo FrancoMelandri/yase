@@ -43,9 +43,7 @@ $ kubectl create -f ./k8s/service.yaml
 
 
 
-## Exposed resource
-
-
+## Resources
 
 ### URL creation
 
@@ -71,20 +69,39 @@ As you can see the response contains informations about the **tinyUrl**l generat
 
 ### URL match
 
-Calling the resources **/starge** using the POST HTTP verb we are able to store the information in the DB.
+Calling the same resources using the **POST** HTTP verb we are able to retrieve the original URL associated to a tiny URL previously created.
 
 ```bash
 $ curl -X POST \
-      http://localhost:9001/storage \
+      http://localhost:9000/engine \
       -H 'cache-control: no-cache' \
       -H 'content-type: application/json' \
       -d '{
-        "originalUrl": "https://www.example.com/param1=1&param2=2&param3=3&param4=4"
-        "tinyUrl": "69208a74"
+        "url": "http://base.com/69208a74"
     }'
  
  ---
  
- {"tinyUrl":"http://base.com/69208a7","originalUrl":"https://www.example.com/param1=1&param2=2&param3=3&param4=4","hashedUrl":"69208a7","hitted":0}
+ {"tinyUrl":"http://base.com/69208a7","originalUrl":"https://www.example.com/param1=1&param2=2&param3=3&param4=4"}
+```
+
+
+
+### URL delete
+
+Calling the same resources using the **DELETE** HTTP verb we are able to remove the original URL associated to a tiny URL previously created.
+
+```bash
+$ curl -X DELETE \
+      http://localhost:9000/engine \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -d '{
+        "url": "http://base.com/69208a74"
+    }'
+ 
+ ---
+ 
+200 OK
 ```
 
