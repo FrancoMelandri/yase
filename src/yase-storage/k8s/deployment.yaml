@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: yase-storage
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: yase-storage
+    spec:
+      containers:
+      - name: yase-storage
+        image: francomelandri/yase-storage
+        ports:
+        - containerPort: 80

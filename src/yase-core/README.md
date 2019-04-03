@@ -16,7 +16,7 @@ The command to build the docker image
 $ docker build -r yase-core .
 ```
 
-Tagging the image and push it to the docker hub (you need a docker login in order to tpush to the remote docker hub)
+Tagging the image and push it to the docker hub (you need a docker login in order to push to the remote docker hub)
 
 ```bash
 $ docker tag yase-core francomelandri/yase-core
@@ -71,15 +71,16 @@ As you can see the response contains informations about the **tinyUrl**l generat
 
 ### URL match
 
-Calling the same resources using the POST HTTP verb we are able to retrieve the original URL associated to a tiny URL previously created.
+Calling the resources **/starge** using the POST HTTP verb we are able to store the information in the DB.
 
 ```bash
 $ curl -X POST \
-      http://localhost:9000/engine \
+      http://localhost:9001/storage \
       -H 'cache-control: no-cache' \
       -H 'content-type: application/json' \
       -d '{
-        "url": "http://base.com/69208a74"
+        "originalUrl": "https://www.example.com/param1=1&param2=2&param3=3&param4=4"
+        "tinyUrl": "69208a74"
     }'
  
  ---
