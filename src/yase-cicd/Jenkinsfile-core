@@ -17,7 +17,7 @@ pipeline {
                 dir("src") {
                     dir ("yase-core") {
                         script {
-                            sh "docker build -t yase-core-tests"
+                            sh "docker build -t yase-core-tests ."
                         }
                     }
                 }
@@ -29,7 +29,7 @@ pipeline {
                 dir("src") {
                     dir ("yase-core") {
                         script {
-                            sh "docker build -t yase-core"
+                            sh "docker build -t yase-core ."
                         }
                     }
                 }
