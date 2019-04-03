@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage ("Publis") {
+        stage ("Publish") {
             steps {
                 script {
                     sh "docker tag yase-core francomelandri/yase-core"
