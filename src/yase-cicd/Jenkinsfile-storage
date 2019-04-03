@@ -13,9 +13,9 @@ pipeline {
         stage ("Test") {
             steps {
                 dir("src") {
-                    dir ("yase-core") {
+                    dir ("yase-storage") {
                         script {
-                            sh "docker build -t yase-core-tests ."
+                            sh "docker build -t yase-storage-tests ."
                         }
                     }
                 }
@@ -25,9 +25,9 @@ pipeline {
         stage ("Build") {
             steps {
                 dir("src") {
-                    dir ("yase-core") {
+                    dir ("yase-storage") {
                         script {
-                            sh "docker build -t yase-core ."
+                            sh "docker build -t yase-storage ."
                         }
                     }
                 }
@@ -37,9 +37,9 @@ pipeline {
         stage ("Publish") {
             steps {
                 script {
-                    sh "docker tag yase-core francomelandri/yase-core"
+                    sh "docker tag yase-storage francomelandri/yase-storage"
     //                sh "docker login"
-    //                sh "docker push francomelandri/yase-core"
+    //                sh "docker push francomelandri/yase-storage"
                 }
             }
         }
