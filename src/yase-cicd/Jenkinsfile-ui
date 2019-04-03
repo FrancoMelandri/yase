@@ -1,0 +1,35 @@
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage ("Checkout") {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage ("Build") {
+            steps {
+                dir("src") {
+                    dir ("yase-ui") {
+                        script {
+                            sh "docker build -t yase-ui ."
+                        }
+                    }
+                }
+            }
+        }
+
+        stage ("Publish") {
+            steps {
+                script {
+                    sh "docker tag yase-ui francomelandri/yase-ui"
+    //                sh "docker login"
+    //                sh "docker push francomelandri/yase-ui"
+                }
+            }
+        }
+    }
+}
