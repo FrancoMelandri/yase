@@ -2,40 +2,32 @@ version: '3'
 services:
   mongodb:
     image: mongo
-    #network_mode: 'host'
+    network_mode: 'host'
     ports:
       - "27017:27017"
     volumes:
       - 'mongodata:/data/db'
-    networks:
-      - default
-  # yase-core:
-  #   image: yase-core
-  #   #network_mode: "host"
-  #   ports:
-  #     - "9000:9000"
-  #   networks:
-  #     - default
-  #   environment:
-  #     - YASE_STORAGE_SERVICE_HOST=localhost
-  #     - YASE_STORAGE_SERVICE_PORT=9001
-  # yase-storage:
-  #   image: yase-storage
-  #   #network_mode: "host"
-  #   ports:
-  #     - "9001:9001"
-  #   networks:
-  #     - default
-  # yase-ui:
-  #   image: yase-ui
-  #   ports:
-  #     - '8080:3000'
-  #   networks:
-  #     - default
-  #   environment:
-  #     - NODE_ENV=development
-  #     - YASE_CORE_SERVICE_HOST=localhost
-  #     - YASE_CORE_SERVICE_PORT=9000
+  yase-core:
+    image: yase-core
+    network_mode: "host"
+    ports:
+      - "9000:9000"
+    environment:
+      - YASE_STORAGE_SERVICE_HOST=localhost
+      - YASE_STORAGE_SERVICE_PORT=9001
+  yase-storage:
+    image: yase-storage
+    network_mode: "host"
+    ports:
+      - "9001:9001"
+  yase-ui:
+    image: yase-ui
+    ports:
+      - '8080:3000'
+    environment:
+      - NODE_ENV=development
+      - YASE_CORE_SERVICE_HOST=localhost
+      - YASE_CORE_SERVICE_PORT=9000
 
 volumes:
    mongodata:
