@@ -1,0 +1,13 @@
+dist: trusty
+sudo: false
+language: csharp
+mono: none
+dotnet: 2.1
+install:
+  - dotnet restore ./src/yase-core/source/yase-core.csproj
+  # - nvm install 8.1.0
+  # - nvm use 8.10.0
+  # - npm install
+script:    
+  - dotnet test ./src/yase-core/source/yase-core.csproj
+  # - npm test
