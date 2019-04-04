@@ -13,7 +13,7 @@ namespace yase_core.Logic
         Option<Boolean> Delete(string hash);
     }
 
-    class StorageServiceWrapper : IStorageServiceWrapper
+    public class StorageServiceWrapper : IStorageServiceWrapper
     {
         private const string STORAGE_BASE_URL = "StorageService";
         private const string STORAGE_HOST = "YASE_STORAGE_SERVICE_HOST";
@@ -39,21 +39,31 @@ namespace yase_core.Logic
             var requesturl = string.Format ("{0}/Storage/{1}",  
                                             _storageBaseUrl,
                                             hash);
-            return _httpRequests
-                        .Get(requesturl)
-                        .FromJson<ShortUrl>()
-                        .ToOption();
+            try {
+                return _httpRequests
+                            .Get(requesturl)
+                            .FromJson<ShortUrl>()
+                            .ToOption();
+            }
+            catch {
+                return Option.None<ShortUrl>();
+            }
         }
 
         public Option<ShortUrl> GetOrInsert(ShortUrl tiny)
         {
             var requesturl = string.Format ("{0}/Storage",  
                                             _storageBaseUrl);
-            return _httpRequests
-                        .Post(requesturl,
-                              tiny.ToJson())
-                        .FromJson<ShortUrl>()
-                        .ToOption();
+            try {
+                return _httpRequests
+                            .Post(requesturl,
+                                tiny.ToJson())
+                            .FromJson<ShortUrl>()
+                            .ToOption();
+            }
+            catch {
+                return Option.None<ShortUrl>();
+            }
         }
 
         public Option<Boolean> Delete(string hash)
