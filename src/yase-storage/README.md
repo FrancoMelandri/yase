@@ -4,13 +4,15 @@
 
 
 
-The aim of this service is to provide the persistence layer to the core engine.
+The aim of this service is to provide the persistence layer to the core engine (CRUD).
 
 As I said I have decided to decouple core logic from persistence logic in order to allow the application stack to be deployed where we want avoiding vendor lock-in.
 
-For example we ca use the mongo db configuration in case of on-premise installation.
+For example we can use the mongo db configuration in on-premise installation.
 
-In case of AWS installation we should move into **DynamoDB**. We can do this replacing the storage service with a new one and without changing the core logic.
+In case of AWS installation we should move into **DynamoDB**, in **Azure** we should use **DocumentDB**, or we can consider to use some **DbaaS**. 
+
+We can do this replacing the storage service with a new one without changing the core logic.
 
  
 

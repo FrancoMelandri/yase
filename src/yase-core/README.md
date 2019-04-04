@@ -2,7 +2,7 @@
 
 
 
-Core service to provde tha main functionalities of the shortener engine.
+Core service to provide the base functionalities of the shortener engine.
 
 The aim of this module is to encapsulate all the logic to generate, applying time to live, store and get the short URL.
 
@@ -47,7 +47,7 @@ $ kubectl create -f ./k8s/service.yaml
 
 ### hash
 
-At the moment as hashing algorithm I decided to calculate an **MD5** of the original URL and take the frst N characters.
+At the moment as hashing algorithm I decided to calculate an **MD5** of the original URL and take the first N characters.
 
 Due the fact the Hashing algorithm is implemented by a particular class that implement a well defined interface injected using the dotnet **IoC**, I am always able to change the logic without any kind of impact in the rest of the code.
 
