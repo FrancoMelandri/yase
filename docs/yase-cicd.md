@@ -12,7 +12,7 @@ $ docker run --name jenkinsci -p 8080:8080 jenkins/blueocean
 
 Once you have setup the **Jenkins** server without any kind of plugin, you are able to add your own Pipeline configuring in this way
 
-![architecture](../../imgs/pipeline.png)
+![architecture](./pipeline.png)
 
 
 

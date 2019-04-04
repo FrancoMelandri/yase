@@ -9,14 +9,14 @@ This project show how to develop a simple shortener service similar to [https://
 
 This mono repo contains all the components related to the project
 
-| Component    | Description                                                  | Refrence                               |
-| ------------ | ------------------------------------------------------------ | -------------------------------------- |
-| yase-core    | Core engine of the application                               | [README](./src/yase-core/README.md)    |
-| yase-storage | Storage service                                              | [README](./src/yase-storage/README.md) |
-| yase-ui      | Web front end                                                | [README](./src/yase-ui/README.md)      |
-| yase-cicd    | Pipelines to build and deploy                                | [README](./src/yase-cicd/README.md)    |
-| local        | A list of resources let you able to run all the application stack in your local environment | [README](./src/local/README.md)        |
-|              |                                                              |                                        |
+| Component    | Description                                                  | Refrence                         |
+| ------------ | ------------------------------------------------------------ | -------------------------------- |
+| yase-core    | Core engine of the application                               | [README](./docs/yase-core.md)    |
+| yase-storage | Storage service                                              | [README](./docs/yase-storage.md) |
+| yase-ui      | Web front end                                                | [README](./docs/yase-ui.md)      |
+| yase-cicd    | Pipelines to build and deploy                                | [README](./docs/yase-cicd.md)    |
+| local        | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
+|              |                                                              |                                  |
 
 
 
@@ -24,7 +24,7 @@ This mono repo contains all the components related to the project
 
 This is the big picture of the architecture for the shortener application
 
-![architecture](imgs/architecture.png)
+![architecture](docs/architecture.png)
 
 
 
