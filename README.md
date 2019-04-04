@@ -18,7 +18,7 @@ This mono repo contains all the components related to the project
 | yase-ui      | Web front end                                                | [README](./docs/yase-ui.md)      |
 | yase-cicd    | Pipelines to build and deploy                                | [README](./docs/yase-cicd.md)    |
 | local        | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
-|              |                                                              |                                  |
+| open tracing | The two main services supports open tracing using Jaeger as engine. | [README](./docs/yase-jaeger.md)  |
 
 
 
@@ -51,6 +51,8 @@ To reach this goal I made some choices
 
 
 
+
+
 ## Improvements
 
 **This is the MVP.**
@@ -62,7 +64,6 @@ There are some  to improve the architecture design.
 - Improve the **Hashing** algorithm
 - Multi datacenter (is quite difficult with K8s vanilla)
 - Use circuit breaker to prevent cascade system failure
-- Use **open tracing** **Jaeger** to trace and monitor all the requests
 - Use **ISTIO** sevice mesh for the east-west communication
 - Use **Prometheus** to monitor the K8s cluster
 - react redux in web ui application
