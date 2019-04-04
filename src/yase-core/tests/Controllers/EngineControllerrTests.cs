@@ -7,7 +7,7 @@ using System;
 using Moq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
-
+using OpenTracing;
 
 namespace yase_core.Controllers.Tests 
 {
@@ -23,7 +23,7 @@ namespace yase_core.Controllers.Tests
         private Mock<IUrlHandler> urlHandler;
         private Validator validator;
         private Mock<ITimeToLive> timeToLive;
-
+        private Mock<ITracer> tracer;
 
         [SetUp]
         public void SetUp()
@@ -34,11 +34,16 @@ namespace yase_core.Controllers.Tests
             urlHandler = new Mock<IUrlHandler>();
             timeToLive = new Mock<ITimeToLive> ();
             validator = new Validator(timeToLive.Object);
+            tracer = new Mock<ITracer>();
             sut = new EngineController(settings.Object,
                                        hashing.Object,
                                        urlHandler.Object,
                                        validator,
-                                       storageServiceWrapper.Object);
+                                       storageServiceWrapper.Object,
+                                       tracer.Object);
+            tracer
+                .Setup (m => m.BuildSpan(It.IsAny<string>()))
+                .Returns(new Mock<ISpanBuilder>().Object);
         }
 
         [Test]

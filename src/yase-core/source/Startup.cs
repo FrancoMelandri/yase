@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Web;
+using OpenTracing;
+using OpenTracing.Util;
+using Jaeger.Samplers;
+using Jaeger;
 
 using yase_core.Logic;
 
@@ -43,6 +47,22 @@ namespace yase_core
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services
+                .AddOpenTracing();
+            
+            services.AddSingleton<ITracer>(serviceProvider =>
+            {
+                string serviceName = serviceProvider.GetRequiredService<IHostingEnvironment>().ApplicationName;
+
+                var tracer = new Tracer.Builder(serviceName)
+                    .WithSampler(new ConstSampler(true))
+                    .Build();
+                    
+                GlobalTracer.Register(tracer);
+
+                return tracer;
+            });
+               
             var hashingSection = Configuration.GetSection(HASHING_SECTION);
             var settings = hashingSection.Get<Settings>();
             services
