@@ -13,12 +13,15 @@ namespace yase_core.Logic
     {
         ISettings _settings;
         IHash _hash;
+        ITimeToLive _timeToLive;
 
         public Hashing(ISettings settings,
-                       IHash hash) 
+                       IHash hash,
+                       ITimeToLive timeToLive) 
         {
             _settings = settings;
             _hash = hash; 
+            _timeToLive = timeToLive;
         }        
 
         public HashingModel Create(Uri url)
@@ -34,7 +37,7 @@ namespace yase_core.Logic
                 TinyUrl = tinyUrl,
                 OriginalUrl = url,
                 HashedUrl = hashed,
-                ttl = System.DateTime.Now.Ticks + System.TimeSpan.TicksPerMinute * _settings.ttl,
+                ttl = _timeToLive.Get(_settings.ttl),
                 Hitted = 0
             };
         }

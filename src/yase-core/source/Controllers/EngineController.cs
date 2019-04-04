@@ -17,15 +17,18 @@ namespace yase_core.Controllers
         private IHashing _hashing;
         private IStorageServiceWrapper _storageServiceWrapper;
         private IUrlHandler _urlHandler;
+        private IValidator _validator;
 
         public EngineController(ISettings settings,
                                 IHashing hashing,
                                 IUrlHandler urlHandler,
+                                IValidator validator,
                                 IStorageServiceWrapper storageServiceWrapper) 
         {
             _settings = settings;
             _hashing = hashing;
             _urlHandler = urlHandler;
+            _validator = validator;
             _storageServiceWrapper = storageServiceWrapper;
         }
 
@@ -38,7 +41,12 @@ namespace yase_core.Controllers
                                () => string.Empty);
             return _storageServiceWrapper
                         .Get(hash)
-                        .Match<ActionResult>(_ => new JsonResult(_.To(_settings.BaseUrl)), 
+                        .Match<ActionResult>(_ => _validator.Validate<ActionResult>(_,
+                                                            __ =>  new JsonResult(__.To(_settings.BaseUrl)),
+                                                            __ => {
+                                                                    Delete(new HashRequest {Url = __.TinyUrl });
+                                                                    return new NotFoundResult();
+                                                                  } ) ,
                                              () => new NotFoundResult() );
         }
 
@@ -48,7 +56,12 @@ namespace yase_core.Controllers
             var hased = _hashing.Create(new Uri(url.Url));
             return _storageServiceWrapper
                         .GetOrInsert(hased.To())
-                        .Match<ActionResult>(_ => new JsonResult(_.To(_settings.BaseUrl)), 
+                        .Match<ActionResult>(_ => _validator.Validate<ActionResult>(_,
+                                                            __ =>  new JsonResult(__.To(_settings.BaseUrl)),
+                                                            __ => {
+                                                                    Delete(new HashRequest {Url = __.TinyUrl });
+                                                                    return new NotFoundResult();
+                                                                  } ) ,
                                              () => new NotFoundResult() );
         }
 

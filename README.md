@@ -49,7 +49,7 @@ To reach this goal I made some choices
 
 
 
-## Imrproments
+## Improvements
 
 **This is the MVP.**
 
@@ -63,4 +63,5 @@ There are some  to improve the architecture design.
 - Use **open tracing** **Jaeger** to trace and monitor all the requests
 - Use **ISTIO** sevice mesh for the east-west communication
 - Use **Prometheus** to monitor the K8s cluster
+- react redux in web ui application
 

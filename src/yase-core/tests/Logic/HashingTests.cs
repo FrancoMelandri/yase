@@ -13,14 +13,17 @@ namespace yase_core.Logic.Tests
         private Hashing sut;   
         private Mock<ISettings> settings;
         private Mock<IHash> hash;
+        private Mock<ITimeToLive> timeToLive;
 
         [SetUp]
         public void SetUp()
         {
             settings = new Mock<ISettings> ();
             hash = new Mock<IHash>();
+            timeToLive = new Mock<ITimeToLive>();
             sut = new Hashing(settings.Object,
-                              hash.Object);
+                              hash.Object,
+                              timeToLive.Object);
         }
 
         [Test]
@@ -41,6 +44,16 @@ namespace yase_core.Logic.Tests
                 .Returns("aAbB123");
 
             Assert.AreEqual ("http://aa.bb/aAbB123", sut.Create(new Uri(TEST_URL)).TinyUrl.AbsoluteUri);
+        }
+
+        [Test]
+        public void Should_get_time_to_live () 
+        {
+            timeToLive
+                .Setup(m => m.Get(It.IsAny<int>()))
+                .Returns(42);
+
+            Assert.AreEqual (42, sut.Create(new Uri(TEST_URL)).ttl);
         }
     }
 }

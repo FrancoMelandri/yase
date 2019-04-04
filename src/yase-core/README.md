@@ -43,6 +43,22 @@ $ kubectl create -f ./k8s/service.yaml
 
 
 
+## Engine
+
+### hash
+
+At the moment as hashing algorithm I decided to calculate an **MD5** of the original URL and take the frst N characters.
+
+Due the fact the Hashing algorithm is implemented by a particular class that implement a well defined interface injected using the dotnet **IoC**, I am always able to change the logic without any kind of impact in the rest of the code.
+
+### time to live
+
+Every time a tiny URL is generated an expiration TTL is calculated, using a simple algorithm base on a setting parameter defines the amount of minutes.
+
+Every time a client perform a get request of a short URL, the expiration time is checked, and  the entry could be deleted if TTL is expired.
+
+
+
 ## Resources
 
 ### URL creation

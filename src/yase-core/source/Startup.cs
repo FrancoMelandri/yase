@@ -52,7 +52,9 @@ namespace yase_core
                 .AddSingleton<IWebRequestFactory, WebRequestFactory>()
                 .AddSingleton<IHttpRequests, HttpRequests>()
                 .AddSingleton<IStorageServiceWrapper, StorageServiceWrapper>()
-                .AddSingleton<IUrlHandler, UrlHandler>();
+                .AddSingleton<IUrlHandler, UrlHandler>()
+                .AddSingleton<IValidator, Validator>()
+                .AddSingleton<ITimeToLive, TimeToLive>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
