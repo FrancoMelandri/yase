@@ -5,6 +5,7 @@ using yase_storage.Controllers;
 using yase_storage.Logic;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
+using OpenTracing;
 
 namespace yase_storage.Controllers.Tests 
 {
@@ -13,12 +14,19 @@ namespace yase_storage.Controllers.Tests
     {
         private StorageController sut;
         private Mock<IMongoWrapper> mongoWrapper;
+        private Mock<ITracer> tracer;
 
         [SetUp]
         public void SetUp() 
         {
             mongoWrapper = new Mock<IMongoWrapper>();
-            sut = new StorageController(mongoWrapper.Object);
+            tracer = new Mock<ITracer>();
+            sut = new StorageController(mongoWrapper.Object,
+                                        tracer.Object);
+
+            tracer
+                .Setup (m => m.BuildSpan(It.IsAny<string>()))
+                .Returns(new Mock<ISpanBuilder>().Object);
         }
 
         [Test]

@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using OpenTracing;
+using OpenTracing.Util;
+using Jaeger.Samplers;
+using Jaeger;
 
 using yase_storage.Logic;
 
@@ -30,6 +34,22 @@ namespace yase_storage
                 .AddScoped<IMongoWrapper, MongoWrapper>()
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services
+                .AddOpenTracing();
+            
+            services.AddSingleton<ITracer>(serviceProvider =>
+            {
+                string serviceName = serviceProvider.GetRequiredService<IHostingEnvironment>().ApplicationName;
+
+                var tracer = new Tracer.Builder(serviceName)
+                    .WithSampler(new ConstSampler(true))
+                    .Build();
+                    
+                GlobalTracer.Register(tracer);
+
+                return tracer;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

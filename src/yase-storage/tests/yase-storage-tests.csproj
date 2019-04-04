@@ -8,6 +8,8 @@
     <ProjectReference Include="../source/yase-storage.csproj" />
 
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.5.0"/>
+    <PackageReference Include="Jaeger" Version="0.3.1"/>
     <PackageReference Include="Moq" Version="4.7.145" />
     <PackageReference Include="nunit" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OpenTracing;
 
 using yase_storage.Logic;
 using yase_storage.Models;
@@ -13,11 +14,18 @@ namespace yase_storage.Controllers
     [ApiController]
     public class StorageController : ControllerBase
     {
-        private IMongoWrapper _mongoWrapper;
+        private const string JAEGER_GET_TINY = "GET_TINY";
+        private const string JAEGER_POST_TINY = "ADD_TINY";
+        private const string JAEGER_DELETE_TINY = "DELETE_TINY";
 
-        public StorageController(IMongoWrapper mongoWrapper)
+        private IMongoWrapper _mongoWrapper;
+        private ITracer _tracer;
+
+        public StorageController(IMongoWrapper mongoWrapper,
+                                 ITracer tracer)
         {
             _mongoWrapper = mongoWrapper;
+            _tracer = tracer;
         }
 
         [HttpGet]
@@ -29,29 +37,38 @@ namespace yase_storage.Controllers
         [HttpGet("{tiny}")]
         public ActionResult Get(string tiny)
         {
-            return _mongoWrapper
-                        .GetUrl(tiny)
-                        .Match<ActionResult>(_ => new JsonResult(_.To()), 
-                                             () => new NotFoundResult() );
+            using (IScope scope = _tracer.BuildSpan(JAEGER_GET_TINY).StartActive(finishSpanOnDispose: true))
+            {
+                return _mongoWrapper
+                            .GetUrl(tiny)
+                            .Match<ActionResult>(_ => new JsonResult(_.To()), 
+                                                 () => new NotFoundResult() );
+            }
         }
 
         [HttpPost]
         public ActionResult Post([FromBody]ShortUrlRequest value)
         {
-            var mapped = value.To();
-            return _mongoWrapper
-                        .GetOrUpdateUrl<ActionResult>(mapped,
-                                        _ => new JsonResult(_.To()), 
-                                        _ => new ConflictResult() );
+            using (IScope scope = _tracer.BuildSpan(JAEGER_POST_TINY).StartActive(finishSpanOnDispose: true))
+            {
+                var mapped = value.To();
+                return _mongoWrapper
+                            .GetOrUpdateUrl<ActionResult>(mapped,
+                                            _ => new JsonResult(_.To()), 
+                                            _ => new ConflictResult() );
+            }
         }
 
         [HttpDelete("{tiny}")]
         public ActionResult Delete(string tiny)
         {
-            return _mongoWrapper
-                        .DeleteUrl(tiny)
-                        .Match<ActionResult>(_ => new OkResult(), 
-                                             () => new NotFoundResult() );
+            using (IScope scope = _tracer.BuildSpan(JAEGER_DELETE_TINY).StartActive(finishSpanOnDispose: true))
+            {
+                return _mongoWrapper
+                            .DeleteUrl(tiny)
+                            .Match<ActionResult>(_ => new OkResult(), 
+                                                 () => new NotFoundResult() );
+            }
         }
     }
 }
