@@ -8,7 +8,7 @@ install:
   - dotnet restore ./src/yase-core/tests/yase-core-tests.csproj
   - dotnet restore ./src/yase-storage/source/yase-storage.csproj
   - dotnet restore ./src/yase-storage/tests/yase-storage-tests.csproj
-  - nvm install 8.1.0
+  - nvm install 8.10.0
   - nvm use 8.10.0
   - npm install --prefix ./src/yase-ui
 script:    
