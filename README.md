@@ -2,6 +2,8 @@
 **Y**et **A**nother **S**hortener **E**ngine
 
 
+[![Build Status](https://travis-ci.org/FrancoMelandri/yase.svg?branch=master)](https://travis-ci.org/FrancoMelandri/yase) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Abstract
 
