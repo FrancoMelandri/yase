@@ -1,24 +1,23 @@
 # yase
-**Y**et **A**nother **S**hortener **E**ngine
+---
+**Y**et **A**nother **S**hortener **E**ngine        [![Build Status](https://travis-ci.org/FrancoMelandri/yase.svg?branch=master)](https://travis-ci.org/FrancoMelandri/yase) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-[![Build Status](https://travis-ci.org/FrancoMelandri/yase.svg?branch=master)](https://travis-ci.org/FrancoMelandri/yase) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+---
 
 ## Abstract
 
 This project show how to develop a simple shortener service similar to [https://bit.ly/](https://bit.ly/) or [https://goo.gl/](https://goo.gl/).
 
-This mono repo contains all the components related to the project
+This mono repository contains all the components related to the project
 
 | Component    | Description                                                  | Refrence                         |
 | ------------ | ------------------------------------------------------------ | -------------------------------- |
-| yase-core    | Core engine of the application                               | [README](./docs/yase-core.md)    |
+| yase-core    | Core engine service                                          | [README](./docs/yase-core.md)    |
 | yase-storage | Storage service                                              | [README](./docs/yase-storage.md) |
 | yase-ui      | Web front end                                                | [README](./docs/yase-ui.md)      |
-| yase-cicd    | Pipelines to build and deploy                                | [README](./docs/yase-cicd.md)    |
-| local        | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
-| open tracing | The two main services supports open tracing using Jaeger as engine. | [README](./docs/yase-jaeger.md)  |
+| yase-cicd    | Jenkins pipelines to build and deploy                        | [README](./docs/yase-cicd.md)    |
+| yase-tracing | The two main services support open tracing (Jaeger)          | [README](./docs/yase-jaeger.md)  |
+| yase-local   | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
 
 
 
