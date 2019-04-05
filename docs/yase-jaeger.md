@@ -1,8 +1,8 @@
 # yase-tracing
 
-The two services supports open tracing standard to trace and logging all the request
+Both services, core and storage, support open tracing standard to trace and log all the requests.
 
-In order to activate in your local machine the **jaeger** stack you should use the command
+In order to activate in your local machine the **jaeger** stack (<https://www.jaegertracing.io/>) you should use the command
 
 ```bash
 $ docker run -d --name jaeger \
@@ -17,9 +17,9 @@ $ docker run -d --name jaeger \
   jaegertracing/all-in-one:1.8
 ```
 
+and all the stuff is up and running at the address http://localhost:16686
 
 
-and all the stuff is up and running
 
 Take a look to the dashboard
 
@@ -30,3 +30,5 @@ Take a look to the dashboard
 and the snap
 
 ![Dashboard](jaeger-snap.png)
+
+Awesome!!
