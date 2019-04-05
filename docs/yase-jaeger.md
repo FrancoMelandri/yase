@@ -29,6 +29,10 @@ Take a look to the dashboard
 
 and the snap
 
-![Dashboard](jaeger-snap.png)
+![Snap](jaeger-snap.png)
+
+and the snap details
+
+![Snap](jaeger-snap-details.png)
 
 Awesome!!
