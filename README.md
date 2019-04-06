@@ -12,12 +12,13 @@ This mono repository contains all the components related to the project
 
 | Component    | Description                                                  | Refrence                         |
 | ------------ | ------------------------------------------------------------ | -------------------------------- |
-| yase-core    | Core engine service                                          | [README](./docs/yase-core.md)    |
+| yase-core      | Core engine service                                          | [README](./docs/yase-core.md)   |
 | yase-storage | Storage service                                              | [README](./docs/yase-storage.md) |
-| yase-ui      | Web front end                                                | [README](./docs/yase-ui.md)      |
-| yase-cicd    | Jenkins pipelines to build and deploy                        | [README](./docs/yase-cicd.md)    |
-| yase-tracing | The two main services support open tracing (Jaeger)          | [README](./docs/yase-jaeger.md)  |
-| yase-local   | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
+| yase-ui         | Web front end                                                | [README](./docs/yase-ui.md)     |
+| yase-cicd       | Jenkins pipelines to build and deploy                        | [README](./docs/yase-cicd.md)   |
+| yase-tracing    | The two main services support open tracing (Jaeger)          | [README](./docs/yase-jaeger.md) |
+| yase-monitoring | Prometheus integration           | [README](./docs/yase-monitoring.md) |
+| yase-local      | A list of resources let you able to run all the application stack in your local environment | [README](./docs/yase-local.md)   |
 
 
 
