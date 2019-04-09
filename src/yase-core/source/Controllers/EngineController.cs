@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
 using OpenTracing;
+using Prometheus.Client;
 
 using yase_core.Logic;
 using yase_core.Models;
@@ -25,6 +27,8 @@ namespace yase_core.Controllers
         private IValidator _validator;
         private ITracer _tracer;
 
+        // private readonly Counter _counter = Metrics.CreateCounter("myCounter", "some help about this");
+        
         public EngineController(ISettings settings,
                                 IHashing hashing,
                                 IUrlHandler urlHandler,
@@ -45,6 +49,8 @@ namespace yase_core.Controllers
         {
             using (IScope scope = _tracer.BuildSpan(JAEGER_GET_TINY).StartActive(finishSpanOnDispose: true))
             {
+                // System.Console.WriteLine ("GET: " + url.Url.ToString());
+                // _counter.Inc();
                 var hash = _urlHandler
                             .GetHash(url.Url)
                             .Match(_ => _,

@@ -15,6 +15,10 @@ using OpenTracing;
 using OpenTracing.Util;
 using Jaeger.Samplers;
 using Jaeger;
+using Prometheus.Client.MetricServer;
+using Prometheus.Client.AspNetCore;
+using Prometheus.Client.Collectors;
+using Prometheus;
 
 using yase_core.Logic;
 
@@ -87,6 +91,25 @@ namespace yase_core
             {
                 app.UseHsts();
             }
+            
+            var counter = Metrics.CreateCounter("PathCounter", "Counts requests to endpoints", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            });
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+            
+            // app.UsePrometheusServer(q => { q.UseDefaultCollectors = false; });
+            // app.UsePrometheusServer(q =>
+            // {
+            //     q.CollectorRegistryInstance = new CollectorRegistry();
+            //     q.MapPath = "/default-metrics";
+            // });
+
+            app.UsePrometheusServer();
             app.UseCors(CORS_POLICY);
             app.UseMvc();
         }
