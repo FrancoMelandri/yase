@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using yase_core.Models;
 using yase_core.Utilities;
 

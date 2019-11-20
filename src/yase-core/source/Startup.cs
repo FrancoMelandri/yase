@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System.Web;
 using OpenTracing;
 using OpenTracing.Util;
 using Jaeger.Samplers;
 using Jaeger;
-
 using yase_core.Logic;
 
 namespace yase_core
@@ -45,14 +36,14 @@ namespace yase_core
 
             services
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services
                 .AddOpenTracing();
             
             services.AddSingleton<ITracer>(serviceProvider =>
             {
-                string serviceName = serviceProvider.GetRequiredService<IHostingEnvironment>().ApplicationName;
+                string serviceName = serviceProvider.GetRequiredService<IWebHostEnvironment>().ApplicationName;
 
                 var tracer = new Tracer.Builder(serviceName)
                     .WithSampler(new ConstSampler(true))
@@ -77,16 +68,9 @@ namespace yase_core
                 .AddSingleton<ITimeToLive, TimeToLive>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            app.UseDeveloperExceptionPage();
             app.UseCors(CORS_POLICY);
             app.UseMvc();
         }

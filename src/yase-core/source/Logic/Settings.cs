@@ -1,6 +1,4 @@
-using System;
-
-namespace yase_core.Logic 
+namespace yase_core.Logic
 {
     public interface ISettings
     {

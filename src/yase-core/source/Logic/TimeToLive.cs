@@ -1,7 +1,4 @@
-using System.Security.Cryptography;
-using System.Text;
-
-namespace yase_core.Logic 
+namespace yase_core.Logic
 {
     public interface ITimeToLive
     {
@@ -12,13 +9,9 @@ namespace yase_core.Logic
     class TimeToLive : ITimeToLive 
     {
         public long Get(int expiration)
-        {
-            return  System.DateTime.Now.Ticks + System.TimeSpan.TicksPerMinute * expiration;
-        }
+            => System.DateTime.Now.Ticks + System.TimeSpan.TicksPerMinute * expiration;
 
         public long Now()
-        {
-            return  System.DateTime.Now.Ticks;
-        }
+            => System.DateTime.Now.Ticks;
     }
 }

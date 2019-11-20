@@ -1,8 +1,7 @@
 using System;
-using System.Net;
 using yase_core.Models;
 
-namespace yase_core.Logic 
+namespace yase_core.Logic
 {
     public interface IHashing
     {
